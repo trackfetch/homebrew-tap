@@ -5,25 +5,25 @@ class Trackfetch < Formula
 
   on_macos do
     on_arm do
-      url "https://github.com/ByteMe6/trackfetch/releases/download/v2.2.11/trackfetch-macos-arm64"
-      sha256 "e2a65963a0c4f0a309fbb2ea81e99d028aca2abafdeda9ecc3226451e45ec6ac"
+      url "https://github.com/ByteMe6/trackfetch/releases/download/v2.3.3/trackfetch-macos-arm64"
+      sha256 "8381fb81f0a3c35a288df6acbdceda90f03d3dd9b59d3b1b2c6071f8a858746a"
     end
 
     on_intel do
-      url "https://github.com/ByteMe6/trackfetch/releases/download/v2.2.11/trackfetch-macos-x86_64"
-      sha256 "c1db0b2a577b4247b11073eefc6ec584a7a7954ef1c8e73530c58f6e0ba35b2f"
+      url "https://github.com/ByteMe6/trackfetch/releases/download/v2.3.3/trackfetch-macos-x86_64"
+      sha256 "baa7a4616c64ed8123e42f48f5659234a45d16f0db6d03fe6daad0b1e533012b"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/ByteMe6/trackfetch/releases/download/v2.2.11/trackfetch-linux-arm64"
-      sha256 "9930906dd9adf0163f9e7e6adb2a19f494a97a1e37167ea502e51b25ac323e12"
+      url "https://github.com/ByteMe6/trackfetch/releases/download/v2.3.3/trackfetch-linux-arm64"
+      sha256 "300f36e35fde205b7ba6d692e60cc98e2c9187ad5b2656586e7fe873c8574ed3"
     end
 
     on_intel do
-      url "https://github.com/ByteMe6/trackfetch/releases/download/v2.2.11/trackfetch-linux-x86_64"
-      sha256 "5411f9051be89e58eda568c5b95efe2604c1d73dc659fe2516e6cd4297470e85"
+      url "https://github.com/ByteMe6/trackfetch/releases/download/v2.3.3/trackfetch-linux-x86_64"
+      sha256 "e0259548cffc1267e76db4f1c7cc84c39139d286e0912da8ae422695b4d3be9e"
     end
 
     depends_on "ffmpeg"
