@@ -5,7 +5,7 @@ Homebrew tap for [trackfetch](https://github.com/ByteMe6/trackfetch).
 ## Install
 
 ```sh
-brew install ByteMe6/tap/trackfetch
+brew install trackfetch/tap/trackfetch
 ```
 
 `brew install` downloads prebuilt files: trackfetch itself is never compiled, and
