@@ -17,12 +17,12 @@ jobs:
       - uses: Homebrew/actions/setup-homebrew@main
       - name: Tap this checkout
         run: |
-          taps="$(brew --repository)/Library/Taps/byteme"
+          taps="$(brew --repository)/Library/Taps/trackfetch"
           mkdir -p "$taps"
           rm -rf "$taps/homebrew-tap"
           ln -s "$GITHUB_WORKSPACE" "$taps/homebrew-tap"
       - name: Audit
-        run: brew audit --strict --online ByteMe6/tap/trackfetch
+        run: brew audit --strict --online trackfetch/tap/trackfetch
 
   install:
     name: install (${{ matrix.os }})
@@ -38,7 +38,7 @@ jobs:
         # Tests the formula from this checkout, so a pull request is tested
         # before it lands instead of the copy already in the tap.
         run: |
-          taps="$(brew --repository)/Library/Taps/byteme"
+          taps="$(brew --repository)/Library/Taps/trackfetch"
           mkdir -p "$taps"
           rm -rf "$taps/homebrew-tap"
           ln -s "$GITHUB_WORKSPACE" "$taps/homebrew-tap"
@@ -48,12 +48,12 @@ jobs:
         # there instead of being built from source for half an hour.
         run: |
           if [ "${{ matrix.os }}" = "macos-15-intel" ]; then
-            brew install --ignore-dependencies ByteMe6/tap/trackfetch
+            brew install --ignore-dependencies trackfetch/tap/trackfetch
           else
-            brew install --build-from-source ByteMe6/tap/trackfetch
+            brew install --build-from-source trackfetch/tap/trackfetch
           fi
       - name: brew test
         if: matrix.os != 'macos-15-intel'
-        run: brew test ByteMe6/tap/trackfetch
+        run: brew test trackfetch/tap/trackfetch
       - name: Run
         run: 'trackfetch --help | grep "usage: trackfetch"'

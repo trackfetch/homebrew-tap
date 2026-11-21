@@ -1,6 +1,6 @@
 # homebrew-tap
 
-Homebrew tap for [trackfetch](https://github.com/ByteMe6/trackfetch).
+Homebrew tap for [trackfetch](https://github.com/trackfetch/trackfetch).
 
 ## Install
 
@@ -21,7 +21,7 @@ on macOS neither is `ffmpeg`.
 `pillow` is installed as a dependency so the Python image library used for
 cover-art resizing is always present.
 
-You'll also need Spotify API keys, [here's how to get them](https://github.com/ByteMe6/trackfetch#spotify-credentials).
+You'll also need Spotify API keys, [here's how to get them](https://github.com/trackfetch/trackfetch#spotify-credentials).
 
 ## Update
 
@@ -33,5 +33,5 @@ This also refreshes the bundled `ffmpeg`. New releases land here within a day.
 
 ## Issues
 
-- Install problems: [open an issue here](https://github.com/ByteMe6/homebrew-tap/issues)
-- Anything else: [trackfetch issues](https://github.com/ByteMe6/trackfetch/issues)
+- Install problems: [open an issue here](https://github.com/trackfetch/homebrew-tap/issues)
+- Anything else: [trackfetch issues](https://github.com/trackfetch/trackfetch/issues)

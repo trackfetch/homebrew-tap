@@ -60,14 +60,14 @@ def bump(text, repo, asset, tag, digest):
 def main():
     text = FORMULA.read_text()
 
-    version, sums = latest_release("ByteMe6/trackfetch")
+    version, sums = latest_release("trackfetch/trackfetch")
     for asset in (
         "trackfetch-macos-arm64",
         "trackfetch-macos-x86_64",
         "trackfetch-linux-arm64",
         "trackfetch-linux-x86_64",
     ):
-        text = bump(text, "ByteMe6/trackfetch", asset, version, sums[asset])
+        text = bump(text, "trackfetch/trackfetch", asset, version, sums[asset])
 
     for repo, assets in DEPS.items():
         tag, sums = latest_release(repo)

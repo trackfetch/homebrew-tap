@@ -1,28 +1,28 @@
 class Trackfetch < Formula
   desc "Turn a text file of songs into tagged MP3s with Spotify metadata"
-  homepage "https://github.com/ByteMe6/trackfetch"
+  homepage "https://github.com/trackfetch/trackfetch"
   license "GPL-3.0-or-later"
 
   on_macos do
     on_arm do
-      url "https://github.com/ByteMe6/trackfetch/releases/download/v2.3.3/trackfetch-macos-arm64"
+      url "https://github.com/trackfetch/trackfetch/releases/download/v2.3.3/trackfetch-macos-arm64"
       sha256 "8381fb81f0a3c35a288df6acbdceda90f03d3dd9b59d3b1b2c6071f8a858746a"
     end
 
     on_intel do
-      url "https://github.com/ByteMe6/trackfetch/releases/download/v2.3.3/trackfetch-macos-x86_64"
+      url "https://github.com/trackfetch/trackfetch/releases/download/v2.3.3/trackfetch-macos-x86_64"
       sha256 "baa7a4616c64ed8123e42f48f5659234a45d16f0db6d03fe6daad0b1e533012b"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/ByteMe6/trackfetch/releases/download/v2.3.3/trackfetch-linux-arm64"
+      url "https://github.com/trackfetch/trackfetch/releases/download/v2.3.3/trackfetch-linux-arm64"
       sha256 "300f36e35fde205b7ba6d692e60cc98e2c9187ad5b2656586e7fe873c8574ed3"
     end
 
     on_intel do
-      url "https://github.com/ByteMe6/trackfetch/releases/download/v2.3.3/trackfetch-linux-x86_64"
+      url "https://github.com/trackfetch/trackfetch/releases/download/v2.3.3/trackfetch-linux-x86_64"
       sha256 "e0259548cffc1267e76db4f1c7cc84c39139d286e0912da8ae422695b4d3be9e"
     end
 
