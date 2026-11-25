@@ -12,9 +12,10 @@ brew install trackfetch/tap/trackfetch
 on macOS neither is `ffmpeg`.
 
 - **macOS** (Apple Silicon and Intel): the formula installs the prebuilt
-  `trackfetch` binary, and `ffmpeg` comes prebuilt inside the formula too, so it
-  is never compiled — even on macOS versions and Intel Macs where Homebrew has
-  no `ffmpeg` bottle. `yt-dlp` and `deno` are installed by Homebrew as usual.
+  `trackfetch` binary, and `ffmpeg` and `ffprobe` come prebuilt inside the
+  formula too, so neither is compiled — even on macOS versions and Intel Macs
+  where Homebrew has no `ffmpeg` bottle. `yt-dlp` and `deno` are installed by
+  Homebrew as usual.
 - **Linux**: `trackfetch` comes prebuilt and `yt-dlp`, `ffmpeg` and `deno` are
   installed from Homebrew.
 
@@ -29,7 +30,7 @@ You'll also need Spotify API keys, [here's how to get them](https://github.com/t
 brew upgrade trackfetch
 ```
 
-This also refreshes the bundled `ffmpeg`. New releases land here within a day.
+This also refreshes the bundled `ffmpeg` and `ffprobe`. New releases land here within a day.
 
 ## Issues
 

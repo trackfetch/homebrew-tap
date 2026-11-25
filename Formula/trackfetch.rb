@@ -5,25 +5,25 @@ class Trackfetch < Formula
 
   on_macos do
     on_arm do
-      url "https://github.com/trackfetch/trackfetch/releases/download/v2.3.4/trackfetch-macos-arm64"
-      sha256 "341e04a26ddc2435402ed0d70689ab80e9153d886527ac23330a64a935b39c81"
+      url "https://github.com/trackfetch/trackfetch/releases/download/v2.4.0/trackfetch-macos-arm64"
+      sha256 "88e0dfc9c5d2aa0f8ac84d780312bcdc5c5ef47d37bb1290a1a65051b035221e"
     end
 
     on_intel do
-      url "https://github.com/trackfetch/trackfetch/releases/download/v2.3.4/trackfetch-macos-x86_64"
-      sha256 "757733338ecebfb2e36c3df0b984fcea998a93738e69635a838c0f7a8ee3b92b"
+      url "https://github.com/trackfetch/trackfetch/releases/download/v2.4.0/trackfetch-macos-x86_64"
+      sha256 "6f3d6c35c7a6a05f3cb4325185baea49d3c5f90c59a450834d0e780df2beaabc"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/trackfetch/trackfetch/releases/download/v2.3.4/trackfetch-linux-arm64"
-      sha256 "d58ef99c3843800707423f78ce9c4ccca33c9fc5dd05086dd22af4ef95b541f9"
+      url "https://github.com/trackfetch/trackfetch/releases/download/v2.4.0/trackfetch-linux-arm64"
+      sha256 "0c6ebabee8e3b356efa502a8bf26f54b5ea6a6deb90a8973dd7f24538535b46a"
     end
 
     on_intel do
-      url "https://github.com/trackfetch/trackfetch/releases/download/v2.3.4/trackfetch-linux-x86_64"
-      sha256 "53df9d2d1cb148d7216d6f97434db8cad97349e4ba60de3556dea50c7c215734"
+      url "https://github.com/trackfetch/trackfetch/releases/download/v2.4.0/trackfetch-linux-x86_64"
+      sha256 "98fa311024a8dc95261119a6a01ef26dc7df302ee7268640dd6eb29fc488475d"
     end
 
     depends_on "ffmpeg"
@@ -34,13 +34,20 @@ class Trackfetch < Formula
   depends_on "yt-dlp"
 
   # ffmpeg is the formula Homebrew most often has to build from source, and a
-  # source build takes hours. On macOS the upstream static binary is installed
-  # inside the formula instead, so `brew install` never compiles it.
+  # source build takes hours. On macOS the upstream static binaries are
+  # installed inside the formula instead, so `brew install` never compiles it.
+  # trackfetch checks for both ffmpeg and ffprobe at startup, so both are
+  # bundled; the upstream releases ship them separately.
   on_macos do
     on_arm do
       resource "ffmpeg" do
         url "https://github.com/eugeneware/ffmpeg-static/releases/download/b6.1.1/ffmpeg-darwin-arm64.gz"
         sha256 "8923876afa8db5585022d7860ec7e589af192f441c56793971276d450ed3bbfa"
+      end
+
+      resource "ffprobe" do
+        url "https://github.com/eugeneware/ffmpeg-static/releases/download/b6.1.1/ffprobe-darwin-arm64.gz"
+        sha256 "d986a8ec7b030899fe66a8a288ed809a3543338705a3ce178cfb85869c5d80be"
       end
     end
 
@@ -48,6 +55,11 @@ class Trackfetch < Formula
       resource "ffmpeg" do
         url "https://github.com/eugeneware/ffmpeg-static/releases/download/b6.1.1/ffmpeg-darwin-x64.gz"
         sha256 "929b375c1182d956c51f7ac25e0b2b0411fb01f6f407aa15c9758efeb4242106"
+      end
+
+      resource "ffprobe" do
+        url "https://github.com/eugeneware/ffmpeg-static/releases/download/b6.1.1/ffprobe-darwin-x64.gz"
+        sha256 "d4da574d6e2e197bd259b47d69cf262df9e312af24ad960444f6d806d3d4c186"
       end
     end
   end
@@ -58,18 +70,20 @@ class Trackfetch < Formula
     binaries = [libexec/"trackfetch"]
 
     if OS.mac?
-      resource("ffmpeg").stage do
-        # Homebrew unpacks single-file .gz resources on some versions and
-        # leaves them alone on others, so handle both.
-        binary = Dir["ffmpeg-darwin-*"].first
-        if binary.end_with?(".gz")
-          system "gunzip", binary
-          binary = binary.delete_suffix(".gz")
+      { "ffmpeg" => "ffmpeg", "ffprobe" => "ffprobe" }.each do |name, target|
+        resource(name).stage do
+          # Homebrew unpacks single-file .gz resources on some versions and
+          # leaves them alone on others, so handle both.
+          binary = Dir["#{name}-darwin-*"].first
+          if binary.end_with?(".gz")
+            system "gunzip", binary
+            binary = binary.delete_suffix(".gz")
+          end
+          libexec.install binary => target
         end
-        libexec.install binary => "ffmpeg"
-      end
 
-      binaries << libexec/"ffmpeg"
+        binaries << libexec/target
+      end
     end
 
     binaries.each do |binary|
@@ -95,9 +109,9 @@ class Trackfetch < Formula
     return unless OS.mac?
 
     <<~EOS
-      On macOS, ffmpeg is installed inside the formula and is not linked into
-      your PATH; trackfetch uses it automatically. yt-dlp and deno come from
-      Homebrew as usual.
+      On macOS, ffmpeg and ffprobe are installed inside the formula and are not
+      linked into your PATH; trackfetch uses them automatically. yt-dlp and deno
+      come from Homebrew as usual.
     EOS
   end
 
@@ -106,6 +120,7 @@ class Trackfetch < Formula
 
     if OS.mac?
       assert_match "ffmpeg version", shell_output("#{libexec}/ffmpeg -version")
+      assert_match "ffprobe version", shell_output("#{libexec}/ffprobe -version")
     end
 
     assert_predicate Formula["yt-dlp"].opt_bin/"yt-dlp", :exist?

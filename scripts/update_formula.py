@@ -18,7 +18,12 @@ FORMULA = pathlib.Path("Formula/trackfetch.rb")
 
 # repository -> asset names the formula pins
 DEPS = {
-    "eugeneware/ffmpeg-static": ["ffmpeg-darwin-arm64.gz", "ffmpeg-darwin-x64.gz"],
+    "eugeneware/ffmpeg-static": [
+        "ffmpeg-darwin-arm64.gz",
+        "ffmpeg-darwin-x64.gz",
+        "ffprobe-darwin-arm64.gz",
+        "ffprobe-darwin-x64.gz",
+    ],
 }
 
 
